@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: @pom.artifactId@
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: bfe8662580f52bfcbe6d
+            client-secret: 1cce0033fadf002fa242a718d26012f03554b4fc
+
+logging:
+  level.*: info
