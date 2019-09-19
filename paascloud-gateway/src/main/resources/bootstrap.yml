@@ -1,21 +1,22 @@
 spring:
   cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        tags: version=1.0
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
+        healthCheckInterval: 15s
+        health-check-timeout: 100s
     gateway:
       enabled: true
       routes:
-        - id: business-service
-          uri: lb://business-service
+        - id: paascloud-provider-uac
+          uri: lb://paascloud-provider-uac
           predicates:
-            - Path=/business/**
-          filters:
-            - StripPrefix=1
-#    consul:
-#      host: 127.0.0.1
-#      port: 8500
-#      discovery:
-#        prefer-ip-address: true
-#        tags: version=1.0
-#        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
-#        healthCheckInterval: 15s
-#        health-check-timeout: 100s
+            - Path=/uac/**
+#          filters:
+#            - StripPrefix=1
+
 

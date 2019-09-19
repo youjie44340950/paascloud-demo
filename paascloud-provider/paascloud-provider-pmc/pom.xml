@@ -13,4 +13,10 @@
     <description>产品管理中心 - Product manager center</description>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>paascloud-provider-pmc-api</artifactId>
+        </dependency>
+    </dependencies>
 </project>

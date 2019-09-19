@@ -1,5 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.springboot.start.seata.rest.FescarRestTemplateAutoConfiguration,\
-com.springboot.start.seata.web.FescarHandlerInterceptorConfiguration,\
-com.springboot.start.seata.GlobalTransactionAutoConfiguration
-

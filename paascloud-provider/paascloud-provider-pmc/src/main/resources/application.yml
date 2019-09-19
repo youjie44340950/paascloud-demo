@@ -6,3 +6,27 @@ spring:
     active: dev
   application:
     name: @pom.artifactId@
+  datasource:
+    url: jdbc:mysql://47.104.150.14:3306/paascloud_pmc?serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+
+feign:
+  hystrix:
+    enabled: true
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
