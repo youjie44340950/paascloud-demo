@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8085
 
 spring:
   profiles:
@@ -31,5 +31,7 @@ hystrix:
           thread:
             timeoutInMilliseconds: 20000
 
+logging:
+  config: classpath:logback-spring.xml
 
 
