@@ -10,3 +10,4 @@ spring:
         healthCheckInterval: 15s
         health-check-timeout: 100s
 
+
