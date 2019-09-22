@@ -6,10 +6,15 @@ import com.dangdang.ddframe.job.config.simple.SimpleJobConfiguration;
 import com.dangdang.ddframe.job.lite.api.JobScheduler;
 import com.dangdang.ddframe.job.lite.config.LiteJobConfiguration;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
+import org.apache.curator.CuratorZookeeperClient;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.api.GetACLBuilder;
+import org.apache.zookeeper.ZooKeeper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import javax.annotation.Resource;
+import java.util.List;
 
 @Configuration
 public class SimpleJobConfig {
@@ -26,14 +31,23 @@ public class SimpleJobConfig {
      * 普通邮件定时配置
      * @param mailSendJob
      * @param cron
-     * @param shardingTotalCount
      * @param shardingItemParameters
      * @return
      */
     @Bean(initMethod = "init")
     public JobScheduler mailSendJobScheduler(final SimpleJob mailSendJob, @Value("${simpleJob.cron}") final String cron,
-                                             @Value("${simpleJob.shardingTotalCount}") final int shardingTotalCount,
+                                             @Value("${regCenter.namespace}") final String namespace,
                                              @Value("${simpleJob.shardingItemParameters}") final String shardingItemParameters){
+        CuratorFramework client = regCenter.getClient();
+        CuratorZookeeperClient zookeeperClient = client.getZookeeperClient();
+        int shardingTotalCount = 1;
+        try {
+            ZooKeeper zooKeeper = zookeeperClient.getZooKeeper();
+            List<String> children = zooKeeper.getChildren("/"+namespace+"/"+mailSendJob.getClass().getName()+"/instances", false);
+            shardingTotalCount = shardingTotalCount + children.size();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         LiteJobConfiguration jobConfiguration = createJobConfiguration(mailSendJob.getClass(), cron, shardingTotalCount, shardingItemParameters);
         return new JobScheduler(regCenter, jobConfiguration);
     }
