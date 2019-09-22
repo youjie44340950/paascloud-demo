@@ -10,4 +10,6 @@ spring:
         healthCheckInterval: 15s
         health-check-timeout: 100s
 
+logging:
+  config: classpath:logback-spring.xml
 

@@ -30,5 +30,13 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 20000
-logging:
-  config: classpath:logback-spring.xml
+
+
+regCenter:
+  serverList: 47.104.150.14:2181
+  namespace: ${spring.application.name}
+
+simpleJob:
+  cron: 0/5 * * * * ?
+  shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+  shardingTotalCount: 3
