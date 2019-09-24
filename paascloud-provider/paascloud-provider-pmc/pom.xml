@@ -18,21 +18,5 @@
             <groupId>com.example</groupId>
             <artifactId>paascloud-provider-pmc-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.dangdang</groupId>
-            <artifactId>elastic-job-lite-core</artifactId>
-            <version>2.1.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-recipes</artifactId>
-            <version>2.10.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-framework</artifactId>
-            <version>2.10.0</version>
-        </dependency>
-
     </dependencies>
 </project>
