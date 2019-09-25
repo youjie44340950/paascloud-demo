@@ -18,6 +18,10 @@ spring:
             - Path=/uac/**
 #          filters:
 #            - StripPrefix=1
-
-
-
+    config:
+      fail-fast: true
+      discovery:
+        service-id: paascloud-config
+        enabled: true
+      label: ${spring.profiles.active}
+      profile: ${spring.profiles.active}
