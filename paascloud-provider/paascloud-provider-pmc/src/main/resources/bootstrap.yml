@@ -9,7 +9,13 @@ spring:
         instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
         healthCheckInterval: 15s
         health-check-timeout: 100s
+    config:
+      fail-fast: true
+      discovery:
+        service-id: paascloud-config
+        enabled: true
+      label: ${spring.profiles.active}
+      profile: ${spring.profiles.active}
 
-logging:
-  config: classpath:logback-spring.xml
+
 
