@@ -8,4 +8,4 @@ ADD target/*.jar app.jar
 CMD echo "The application will start " && \
     java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /app.jar
 
-EXPOSE 8082
+EXPOSE 8083
