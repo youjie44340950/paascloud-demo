@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.paascloud.gateway","com.paascloud.provider.service.hystrix"})
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = {"com.paascloud.provider.service"})
 public class GatewayApplication {

@@ -1,19 +1,8 @@
 spring:
   cloud:
-    consul:
-      host: 192.168.3.2
-      port: 8500
-      discovery:
-        prefer-ip-address: true
-        tags: version=1.0
-        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
-        healthCheckInterval: 15s
-        health-check-timeout: 100s
     config:
       fail-fast: true
-      discovery:
-        service-id: paascloud-config
-        enabled: true
+      uri: http://127.0.0.1:8083
       label: ${spring.profiles.active}
       profile: ${spring.profiles.active}
 
