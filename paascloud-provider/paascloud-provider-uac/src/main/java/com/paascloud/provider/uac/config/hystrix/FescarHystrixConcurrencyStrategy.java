@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.springboot.start.seata.feign.hystrix;
+package com.paascloud.provider.uac.config.hystrix;
 
 import com.netflix.hystrix.strategy.HystrixPlugins;
 import com.netflix.hystrix.strategy.concurrency.HystrixConcurrencyStrategy;
+import com.paascloud.common.util.UserContext;
 import io.seata.core.context.RootContext;
 
 import java.util.concurrent.Callable;
@@ -60,16 +61,19 @@ public class FescarHystrixConcurrencyStrategy extends HystrixConcurrencyStrategy
 
 		private final Callable<K> actual;
 		private final String xid;
+		private final String userInfo;
 
 		FescarContextCallable(Callable<K> actual) {
 			this.actual = actual;
 			this.xid = RootContext.getXID();
+			this.userInfo = UserContext.get();
 		}
 
 		@Override
 		public K call() throws Exception {
 			try {
 				RootContext.bind(xid);
+				UserContext.put(userInfo);
 				return actual.call();
 			}
 			finally {

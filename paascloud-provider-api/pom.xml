@@ -34,9 +34,5 @@
             <groupId>com.example</groupId>
             <artifactId>paascloud-common-util</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>springboot-starter-seata</artifactId>
-        </dependency>
     </dependencies>
 </project>

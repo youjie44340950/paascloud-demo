@@ -13,25 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.springboot.start.seata.feign.hystrix;
 
-import com.netflix.hystrix.HystrixCommand;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.context.annotation.Bean;
+package com.paascloud.provider.pmc.config.web;
+
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 
  * @author zcb
- * @date 2019年4月9日 上午10:26:12
+ * @date 2019年4月9日 上午10:27:50
  */
 @Configuration
-@ConditionalOnClass(HystrixCommand.class)
-public class FescarHystrixAutoConfiguration {
+public class HandlerInterceptorConfiguration implements WebMvcConfigurer {
 
-	@Bean
-	FescarHystrixConcurrencyStrategy fescarHystrixConcurrencyStrategy() {
-		return new FescarHystrixConcurrencyStrategy();
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new UserInfoHandlerInterceptor()).addPathPatterns("/**");
 	}
-
 }

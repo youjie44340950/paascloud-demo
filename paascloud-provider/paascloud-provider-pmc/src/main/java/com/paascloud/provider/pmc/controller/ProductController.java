@@ -1,5 +1,6 @@
 package com.paascloud.provider.pmc.controller;
 
+import com.paascloud.common.util.UserContext;
 import com.paascloud.common.util.wrapper.WrapMapper;
 import com.paascloud.common.util.wrapper.Wrapper;
 import com.paascloud.provider.model.ProductDto;
@@ -19,6 +20,8 @@ public class ProductController implements ProductFeignApi {
 
     @Override
     public Wrapper saveProduct(@RequestBody ProductDto productDto) {
+        String s = UserContext.get();
+        System.out.println(s);
         Product product = new Product();
         BeanUtils.copyProperties(productDto, product);
         int insert = productMapper.insert(product);

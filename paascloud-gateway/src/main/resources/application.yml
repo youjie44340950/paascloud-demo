@@ -6,6 +6,8 @@ spring:
     active: dev
   application:
     name: @pom.artifactId@
-
-
+  redis:
+    host: 47.104.150.14
+    port: 6379
+    password: paascloud@redis
 
