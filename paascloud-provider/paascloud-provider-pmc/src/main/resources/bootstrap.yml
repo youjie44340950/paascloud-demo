@@ -2,7 +2,7 @@ spring:
   cloud:
     config:
       fail-fast: true
-      uri: http://172.31.3.219:8083
+      uri: http://172.31.3.219:9000
       label: ${spring.profiles.active}
       profile: ${spring.profiles.active}
 
