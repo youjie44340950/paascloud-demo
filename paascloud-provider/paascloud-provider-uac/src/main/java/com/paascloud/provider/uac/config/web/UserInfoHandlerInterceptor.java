@@ -25,9 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * 
- * @author zcb
- * @date 2019年4月9日 上午10:27:57
+ * 获取请求头传递的当前用户信息
  */
 public class UserInfoHandlerInterceptor implements HandlerInterceptor {
 

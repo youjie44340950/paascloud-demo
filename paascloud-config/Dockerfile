@@ -1,5 +1,4 @@
-FROM openjdk:8-jre
-
+FROM 172.31.26.137/paascloud/base:v1
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
     JAVA_OPTS=""
 

@@ -20,11 +20,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * 
- * @author zcb
- * @date 2019年4月9日 上午10:27:50
- */
+
 @Configuration
 public class HandlerInterceptorConfiguration implements WebMvcConfigurer {
 

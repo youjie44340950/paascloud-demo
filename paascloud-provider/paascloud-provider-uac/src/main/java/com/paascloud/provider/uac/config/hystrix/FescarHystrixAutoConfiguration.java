@@ -20,11 +20,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- *
- * @author zcb
- * @date 2019年4月9日 上午10:26:12
- */
+
 @Configuration
 @ConditionalOnClass(HystrixCommand.class)
 public class FescarHystrixAutoConfiguration {

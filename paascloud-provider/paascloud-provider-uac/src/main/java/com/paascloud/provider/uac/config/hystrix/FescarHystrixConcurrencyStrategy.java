@@ -22,11 +22,7 @@ import io.seata.core.context.RootContext;
 
 import java.util.concurrent.Callable;
 
-/**
- * 
- * @author zcb
- * @date 2019年4月9日 上午10:26:19
- */
+
 public class FescarHystrixConcurrencyStrategy extends HystrixConcurrencyStrategy {
 
 	private HystrixConcurrencyStrategy delegate;
@@ -57,7 +53,7 @@ public class FescarHystrixConcurrencyStrategy extends HystrixConcurrencyStrategy
 		return new FescarContextCallable<>(wrappedCallable);
 	}
 
-	private static class FescarContextCallable<K> implements Callable<K> {
+	private  class FescarContextCallable<K> implements Callable<K> {
 
 		private final Callable<K> actual;
 		private final String xid;
