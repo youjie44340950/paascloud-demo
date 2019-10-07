@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDeta
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
-import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
@@ -26,10 +25,10 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
         manager.setPasswordEncoder(new MyPasswordEncoder());
         return http.authenticationManager(manager)
                 .authorizeExchange()
-                .pathMatchers("/**")
-                .authenticated()
                 .pathMatchers("/actuator/**")
                 .permitAll()
+                .pathMatchers("/**")
+                .authenticated()
                 .and()
                 .securityContextRepository(myServerSecurityContextRepository)
                 .cors()
