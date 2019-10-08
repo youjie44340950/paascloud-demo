@@ -1,10 +1,7 @@
+server:
+  port: 9001
 spring:
-  cloud:
-    config:
-      fail-fast: true
-      label: ${spring.profiles.active}
-      profile: ${spring.profiles.active}
-      discovery:
-        service-id: paascloud-config
-        enabled: true
-
+  profiles:
+    active: dev
+  application:
+    name: paascloud-gateway
