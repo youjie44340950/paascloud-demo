@@ -2,8 +2,7 @@ spring:
   cloud:
     config:
       fail-fast: true
-      discovery:
-        service-id: paascloud-config
-        enabled: true
       label: ${spring.profiles.active}
       profile: ${spring.profiles.active}
+      uri: http://127.0.0.1:9000
+
