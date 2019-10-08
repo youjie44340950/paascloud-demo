@@ -4,5 +4,5 @@ spring:
       fail-fast: true
       label: ${spring.profiles.active}
       profile: ${spring.profiles.active}
-      uri: http://127.0.0.1:9000
+      uri: http://172.31.26.137:9000
 
