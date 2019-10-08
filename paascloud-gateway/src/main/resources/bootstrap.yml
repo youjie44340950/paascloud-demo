@@ -5,3 +5,11 @@ spring:
     active: dev
   application:
     name: paascloud-gateway
+  cloud:
+    config:
+      fail-fast: true
+      label: ${spring.profiles.active}
+      profile: ${spring.profiles.active}
+      discovery:
+        service-id: paascloud-config
+        enabled: true
