@@ -1,10 +1,4 @@
-server:
-  port: 9001
 spring:
-  profiles:
-    active: dev
-  application:
-    name: paascloud-gateway
   cloud:
     config:
       fail-fast: true
