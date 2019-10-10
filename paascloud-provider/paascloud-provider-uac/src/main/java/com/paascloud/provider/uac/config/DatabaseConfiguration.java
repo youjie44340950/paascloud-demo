@@ -6,23 +6,11 @@ import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import io.seata.rm.datasource.DataSourceProxy;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-
-import java.sql.SQLException;
-
-
 
 @Configuration
 public class DatabaseConfiguration {
-
-	private final ApplicationContext applicationContext;
-
-	public DatabaseConfiguration(ApplicationContext applicationContext) {
-		this.applicationContext = applicationContext;
-	}
 
 	@Bean(initMethod = "init", destroyMethod = "close")
 	@ConfigurationProperties(prefix = "spring.datasource")
@@ -37,7 +25,7 @@ public class DatabaseConfiguration {
 	}
 
 	@Bean
-	public MybatisSqlSessionFactoryBean sqlSessionFactory(DataSourceProxy dataSourceProxy) throws Exception {
+	public MybatisSqlSessionFactoryBean sqlSessionFactory(DataSourceProxy dataSourceProxy) {
 		// 这里用 MybatisSqlSessionFactoryBean 代替了 SqlSessionFactoryBean，否则 MyBatisPlus 不会生效
 		MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
 		mybatisSqlSessionFactoryBean.setDataSource(dataSourceProxy);

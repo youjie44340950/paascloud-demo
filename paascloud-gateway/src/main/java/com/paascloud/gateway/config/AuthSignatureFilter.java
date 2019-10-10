@@ -14,6 +14,10 @@ import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
 
+/**
+ * 全局过滤器 传递当前登陆用户信息
+ * @Auther: yj
+ */
 @Component
 public class AuthSignatureFilter implements GlobalFilter, Ordered {
 
@@ -21,12 +25,7 @@ public class AuthSignatureFilter implements GlobalFilter, Ordered {
     private RedisTemplate redisTemplate;
 
 
-    /**
-     * 全局过滤器 核心方法
-     * @param exchange
-     * @param chain
-     * @return
-     */
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         WebSession block = exchange.getSession().block();

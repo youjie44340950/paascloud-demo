@@ -9,6 +9,11 @@ import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
 
+
+/**
+ * 将认证信息存入redis
+ * @Auther: yj
+ */
 @Configuration
 public class MyServerSecurityContextRepository implements ServerSecurityContextRepository {
 

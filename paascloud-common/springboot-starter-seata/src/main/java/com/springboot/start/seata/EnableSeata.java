@@ -14,5 +14,9 @@ import java.lang.annotation.*;
 @Import({FescarRestTemplateAutoConfiguration.class,FescarHandlerInterceptorConfiguration.class
 ,GlobalTransactionAutoConfiguration.class})
 
+/**
+ * 启用seata注解
+ * @Auther: yj
+ */
 public @interface EnableSeata {
 }

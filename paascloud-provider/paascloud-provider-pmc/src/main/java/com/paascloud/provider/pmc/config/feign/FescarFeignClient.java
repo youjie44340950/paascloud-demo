@@ -52,7 +52,6 @@ public class FescarFeignClient extends Client.Default {
 		return super.execute(request, options);
 	}
 
-	@SuppressWarnings("deprecation")
 	private Request getModifyRequest(Request request) {
 
 		String xid = RootContext.getXID();
@@ -73,8 +72,7 @@ public class FescarFeignClient extends Client.Default {
 			user.add(userInfo);
 			headers.put(UserContext.key, user);
 		}
-		return Request.create(request.method(), request.url(), headers, request.body(),
-				request.charset());
+		return Request.create(request.httpMethod(),request.url(),headers,request.requestBody());
 	}
 
 }

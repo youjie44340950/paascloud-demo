@@ -6,22 +6,12 @@ import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import io.seata.rm.datasource.DataSourceProxy;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-
-import java.sql.SQLException;
-
 
 @Configuration
 public class DatabaseConfiguration {
 
-	private final ApplicationContext applicationContext;
-
-	public DatabaseConfiguration(ApplicationContext applicationContext) {
-		this.applicationContext = applicationContext;
-	}
 
 	@Bean(initMethod = "init", destroyMethod = "close")
 	@ConfigurationProperties(prefix = "spring.datasource")
