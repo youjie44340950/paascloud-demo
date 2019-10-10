@@ -5,7 +5,6 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
 ENV PARAMS=""
 ADD target/*.jar app.jar
 CMD ${PARAMS}
-RUN if [ -z "/var/log/paascloud" ] ; then  mkdir /var/log/paascloud --force ; fi
 CMD echo "The application will start " && \
     java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /app.jar ${PARAMS}
 
