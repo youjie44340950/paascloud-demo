@@ -34,7 +34,7 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
                 .cors()
                 .and().csrf().csrfTokenRepository(new CookieServerCsrfTokenRepository())
                 .and().formLogin()
-//                .loginPage("http://47.104.150.14:80")
+                .loginPage("http://47.104.150.14:80")
                 .and().logout()
                 .and().oauth2Login()
                 .and().build();
