@@ -24,7 +24,7 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
         manager.setPasswordEncoder(new MyPasswordEncoder());
         return http.authenticationManager(manager)
                 .authorizeExchange()
-                .pathMatchers("/actuator/**")
+                .pathMatchers("/actuator/**","/login/**")
                 .permitAll()
                 .pathMatchers("/**")
                 .authenticated()
