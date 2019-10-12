@@ -21,11 +21,12 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+
         UserDetailsRepositoryReactiveAuthenticationManager manager = new UserDetailsRepositoryReactiveAuthenticationManager(myAuthenticationProvider);
         manager.setPasswordEncoder(new MyPasswordEncoder());
         return http.authenticationManager(manager)
                 .authorizeExchange()
-                .pathMatchers("/actuator/**","/login/**")
+                .pathMatchers("/actuator/**")
                 .permitAll()
                 .pathMatchers("/**")
                 .authenticated()
