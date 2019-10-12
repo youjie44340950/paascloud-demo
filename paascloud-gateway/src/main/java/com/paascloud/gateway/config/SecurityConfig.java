@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UserDetailsRepositoryReactive
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.authentication.RedirectServerAuthenticationSuccessHandler;
 import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
 
 @EnableWebFluxSecurity
@@ -35,7 +36,7 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
                 .cors()
                 .and().csrf().disable()
                 .formLogin()
-//                .loginPage("http://47.104.150.14:80")
+                .loginPage("http://47.104.150.14:80").authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("http://47.104.150.14/#/hello"))
                 .and().logout()
                 .and().oauth2Login()
                 .and().build();
