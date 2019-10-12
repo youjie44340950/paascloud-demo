@@ -18,7 +18,6 @@ public class Cors {
         config.addAllowedHeader("*");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
         source.registerCorsConfiguration("/**", config);
-
         return new CorsWebFilter(source);
     }
 }
