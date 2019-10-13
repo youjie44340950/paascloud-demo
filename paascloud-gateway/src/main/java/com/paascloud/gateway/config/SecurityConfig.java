@@ -49,7 +49,7 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
                 .authenticationSuccessHandler(new MyServerAuthenticationSuccessHandler())
                 .authenticationFailureHandler(new MyServerAuthenticationFailureHandler())
                 .and().logout()
-//                .and().oauth2Login()
+//               .and().oauth2Login()
                 .and().build();
     }
 
