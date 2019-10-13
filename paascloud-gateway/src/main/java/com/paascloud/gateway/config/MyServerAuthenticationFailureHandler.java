@@ -3,6 +3,8 @@ package com.paascloud.gateway.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paascloud.common.util.wrapper.WrapMapper;
 import com.paascloud.common.util.wrapper.Wrapper;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -14,8 +16,10 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 public class MyServerAuthenticationFailureHandler implements ServerAuthenticationFailureHandler {
+    Log log = LogFactory.getLog(MyServerAuthenticationSuccessHandler.class);
     @Override
     public Mono<Void> onAuthenticationFailure(WebFilterExchange webFilterExchange, AuthenticationException exception) {
+        log.info("====================================ERR=========================================================");
         ServerWebExchange exchange = webFilterExchange.getExchange();
         ServerHttpResponse response = exchange.getResponse();
         //设置headers
