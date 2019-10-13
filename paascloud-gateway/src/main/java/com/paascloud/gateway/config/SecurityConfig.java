@@ -41,7 +41,7 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
                 .authenticated()
                 .and()
                 .securityContextRepository(myServerSecurityContextRepository)
-                .cors().disable()
+                .cors().and()
                 .addFilterAt(corsFilter, SecurityWebFiltersOrder.CORS)
                 .csrf().disable()
                 .formLogin()
