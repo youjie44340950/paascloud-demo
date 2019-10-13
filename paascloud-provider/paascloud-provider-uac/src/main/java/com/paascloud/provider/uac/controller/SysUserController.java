@@ -12,6 +12,8 @@ import com.paascloud.provider.uac.service.UserService;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,6 +24,12 @@ public class SysUserController  implements SysUserFeignApi {
 
     @Autowired
     private ProductFeignApi productFeignApi;
+
+    @PostMapping("/uac/registered")
+    public Wrapper registered(@RequestBody SysUser sysUser){
+        boolean save = userService.save(sysUser);
+        return WrapMapper.wrap(200,"注册成功！ 请前往登陆");
+    }
 
     @Override
     public Wrapper<SysUserVo> queryUserInfo(String loginName) {

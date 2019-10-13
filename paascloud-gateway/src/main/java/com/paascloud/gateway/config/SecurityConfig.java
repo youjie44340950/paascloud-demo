@@ -42,14 +42,15 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
                 .and()
                 .securityContextRepository(myServerSecurityContextRepository)
                 .cors().disable()
+                .addFilterAt(corsFilter, SecurityWebFiltersOrder.CORS)
                 .csrf().disable()
                 .formLogin()
                 .loginPage("http://47.104.150.14:80").requiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers(HttpMethod.POST, "/login"))
-                .authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("http://47.104.150.14/#/hello"))
+                .authenticationSuccessHandler(new MyServerAuthenticationSuccessHandler())
+                .authenticationFailureHandler(new MyServerAuthenticationFailureHandler())
                 .and().logout()
-                .and().oauth2Login()
-                .and().addFilterAt(corsFilter, SecurityWebFiltersOrder.CORS)
-                .build();
+//                .and().oauth2Login()
+                .and().build();
     }
 
 }
