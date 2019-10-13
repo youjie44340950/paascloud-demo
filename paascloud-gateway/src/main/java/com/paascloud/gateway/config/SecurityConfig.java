@@ -35,7 +35,7 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
         manager.setPasswordEncoder(new MyPasswordEncoder());
         return http.authenticationManager(manager)
                 .authorizeExchange()
-                .pathMatchers("/actuator/**","/registered/**","/uac/seata/rollback/**")
+                .pathMatchers("/actuator/**","/uac/registered/**","/uac/seata/rollback/**")
                 .permitAll()
                 .pathMatchers("/**")
                 .authenticated()
