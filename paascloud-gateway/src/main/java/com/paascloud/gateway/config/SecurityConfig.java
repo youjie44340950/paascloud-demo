@@ -25,8 +25,8 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
     @Autowired
     private MyServerSecurityContextRepository myServerSecurityContextRepository;
 
-    @Autowired
-    private CorsWebFilter corsFilter;
+//    @Autowired
+//    private CorsWebFilter corsFilter;
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
@@ -42,7 +42,7 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
                 .and()
                 .securityContextRepository(myServerSecurityContextRepository)
                 .cors().and()
-                .addFilterAt(corsFilter, SecurityWebFiltersOrder.CORS)
+//                .addFilterAt(corsFilter, SecurityWebFiltersOrder.CORS)
                 .csrf().disable()
                 .formLogin()
                 .loginPage("http://47.104.150.14:80").requiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers(HttpMethod.POST, "/login"))
