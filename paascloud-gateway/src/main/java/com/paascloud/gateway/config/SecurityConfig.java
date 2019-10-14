@@ -46,7 +46,8 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
                 .csrf().disable()
                 .formLogin()
                 .loginPage("http://47.104.150.14:80").requiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers(HttpMethod.POST, "/login"))
-                .authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("http://47.104.150.14:80/hello"))
+                .authenticationSuccessHandler(new MyServerAuthenticationSuccessHandler())
+                .authenticationFailureHandler(new MyServerAuthenticationFailureHandler())
                 .and().logout()
 //               .and().oauth2Login()
                 .and().build();
