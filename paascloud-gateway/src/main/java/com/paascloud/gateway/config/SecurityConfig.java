@@ -25,8 +25,8 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
     @Autowired
     private MyServerSecurityContextRepository myServerSecurityContextRepository;
 
-//    @Autowired
-//    private CorsWebFilter corsFilter;
+    @Autowired
+    private CorsWebFilter corsFilter;
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
@@ -35,19 +35,18 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
         manager.setPasswordEncoder(new MyPasswordEncoder());
         return http.authenticationManager(manager)
                 .authorizeExchange()
-                .pathMatchers("/actuator/**","/uac/**","/uac/seata/rollback/**")
+                .pathMatchers("/actuator/**","/uac/registered/**")
                 .permitAll()
                 .pathMatchers("/**")
                 .authenticated()
                 .and()
                 .securityContextRepository(myServerSecurityContextRepository)
-                .cors().and()
-//                .addFilterAt(corsFilter, SecurityWebFiltersOrder.CORS)
+                .cors().disable()
+                .addFilterAt(corsFilter, SecurityWebFiltersOrder.CORS)
                 .csrf().disable()
                 .formLogin()
                 .loginPage("http://47.104.150.14:80").requiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers(HttpMethod.POST, "/login"))
-                .authenticationSuccessHandler(new MyServerAuthenticationSuccessHandler())
-                .authenticationFailureHandler(new MyServerAuthenticationFailureHandler())
+                .authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("http://47.104.150.14:80/hello"))
                 .and().logout()
 //               .and().oauth2Login()
                 .and().build();
