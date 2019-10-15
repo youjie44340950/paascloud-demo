@@ -22,7 +22,7 @@
     连接到需要部署的服务器，通过docker拉取镜像再运行shell脚本启动容器
     部署环境：
        一台CPU：1核  内存：2GiB和两台CPU：1核  内存：1GiB阿里云服务器 操作系统 Centos7 ,和一台云数据库RDS组成，
-    由于服务器器不够就没部署 日志管理：LFK（Elasticsearch, FileBeat, Kibana） 
+    由于服务器不够就没部署 日志管理：LFK（Elasticsearch, FileBeat, Kibana） 
     
 ```
 ### 平台目录结构说明
@@ -52,7 +52,7 @@
 
 ```
 
-## 配套项目
+## 项目地址
 
 ```
 后端项目代码地址：https://github.com/youjie44340950/paascloud-demo.git     shell 脚本在 doc 目录下
