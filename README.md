@@ -57,6 +57,10 @@
 ```
 后端项目代码地址：https://github.com/youjie44340950/paascloud-demo.git     shell 脚本在 doc 目录下
 
+前端代码地址: https://github.com/youjie44340950/vue-learn.git
+
+配置文件地址: https://github.com/youjie44340950/paascloud-config.git 
+
 Jenkins地址：http://47.104.150.14:8080/       用户名 root  密码 123456   欢迎大家指出不对的地方和能改进的地方   但是请不要直接修改配置
 
 项目实例访问地址: http://47.104.150.14:80
