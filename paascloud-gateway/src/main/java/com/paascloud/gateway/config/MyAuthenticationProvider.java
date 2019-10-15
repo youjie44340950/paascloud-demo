@@ -25,7 +25,6 @@ public class MyAuthenticationProvider implements ReactiveUserDetailsService {
             SysUserVo result1 = sysUserVoWrapper.getResult();
             result = User.builder().username(username).password(result1.getPassword()).roles("admin").build();
         }
-        log .info("========================================="+sysUserVoWrapper.getCode()+"===========================");
         return result == null ? Mono.empty() : Mono.just(User.withUserDetails(result).build());
     }
 
