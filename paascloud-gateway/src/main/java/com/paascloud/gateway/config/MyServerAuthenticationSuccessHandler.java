@@ -7,12 +7,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
 
 public class MyServerAuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
@@ -21,15 +24,17 @@ public class MyServerAuthenticationSuccessHandler implements ServerAuthenticatio
 
     @Override
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
-        log.info("====================================SUCCESS=========================================================");
+        ServerWebExchange exchange1 = webFilterExchange.getExchange();
+        Mono<WebSession> session = exchange1.getSession();
         ServerWebExchange exchange = webFilterExchange.getExchange();
         ServerHttpResponse response = exchange.getResponse();
+        WebSession block = session.block();
         //设置headers
         HttpHeaders httpHeaders = response.getHeaders();
         httpHeaders.add("Content-Type", "application/json; charset=UTF-8");
         httpHeaders.add("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
         //设置body
-        Wrapper wsResponse = WrapMapper.success("");
+        Wrapper wsResponse = WrapMapper.wrap(200,block.getId());
         byte[]   dataBytes={};
         ObjectMapper mapper = new ObjectMapper();
         try {
