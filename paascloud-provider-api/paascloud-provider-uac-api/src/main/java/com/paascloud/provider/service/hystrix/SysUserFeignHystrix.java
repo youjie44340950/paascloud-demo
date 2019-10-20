@@ -14,6 +14,11 @@ public class SysUserFeignHystrix implements SysUserFeignApi {
     }
 
     @Override
+    public Wrapper registered(SysUserVo sysUser) {
+        return WrapMapper.timeOutWrap();
+    }
+
+    @Override
     public Wrapper testRollback(String productName) {
         return WrapMapper.timeOutWrap();
     }

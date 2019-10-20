@@ -15,6 +15,7 @@ public class MyAuthenticationProvider implements ReactiveUserDetailsService {
 
     @Autowired
     private SysUserFeignApi sysUserFeignApi;
+
     Log log = LogFactory.getLog(MyServerAuthenticationSuccessHandler.class);
 
     @Override
@@ -23,7 +24,7 @@ public class MyAuthenticationProvider implements ReactiveUserDetailsService {
         Wrapper<SysUserVo> sysUserVoWrapper = sysUserFeignApi.queryUserInfo(username);
         if (sysUserVoWrapper.getCode() == 200 && sysUserVoWrapper.getResult() != null){
             SysUserVo result1 = sysUserVoWrapper.getResult();
-            result = User.builder().username(username).password(result1.getPassword()).roles("admin").build();
+            result = User.builder().username(username).password(result1.getPassword()).roles("user").build();
         }
         return result == null ? Mono.empty() : Mono.just(User.withUserDetails(result).build());
     }

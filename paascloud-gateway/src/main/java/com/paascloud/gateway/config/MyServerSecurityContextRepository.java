@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.web.server.context.ServerSecurityContextRepository;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebSession;
@@ -16,7 +17,7 @@ import reactor.core.publisher.Mono;
  * 将认证信息存入redis
  * @Auther: yj
  */
-@Configuration
+@Component
 public class MyServerSecurityContextRepository implements ServerSecurityContextRepository {
 
     @Autowired

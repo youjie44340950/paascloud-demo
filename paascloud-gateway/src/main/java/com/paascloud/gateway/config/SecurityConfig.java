@@ -1,6 +1,7 @@
 package com.paascloud.gateway.config;
 
 
+import com.paascloud.gateway.config.oauth2.Oauth2AuthoConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -10,11 +11,8 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.springframework.security.web.server.authentication.RedirectServerAuthenticationSuccessHandler;
-import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers;
 import org.springframework.web.cors.reactive.CorsWebFilter;
-import org.springframework.web.reactive.function.client.WebClient;
 
 @EnableWebFluxSecurity
 public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration {
@@ -28,12 +26,19 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
     @Autowired
     private CorsWebFilter corsFilter;
 
+    @Autowired
+    private MyServerAuthenticationSuccessHandler myServerAuthenticationSuccessHandler;
+
+    @Autowired
+    private Oauth2AuthoConfig  oauth2AuthoConfig;
+
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-
         UserDetailsRepositoryReactiveAuthenticationManager manager = new UserDetailsRepositoryReactiveAuthenticationManager(myAuthenticationProvider);
         manager.setPasswordEncoder(new MyPasswordEncoder());
-        return http.authenticationManager(manager)
+        oauth2AuthoConfig.configure(http);
+        return http
+                .authenticationManager(manager)
                 .authorizeExchange()
                 .pathMatchers("/actuator/**","/uac/registered/**")
                 .permitAll()
@@ -46,9 +51,12 @@ public class SecurityConfig extends ReactiveUserDetailsServiceAutoConfiguration 
                 .csrf().disable()
                 .formLogin()
                 .loginPage("http://47.104.150.14:80").requiresAuthenticationMatcher(ServerWebExchangeMatchers.pathMatchers(HttpMethod.POST, "/login"))
-                .authenticationSuccessHandler(new MyServerAuthenticationSuccessHandler())
+                .authenticationSuccessHandler(myServerAuthenticationSuccessHandler)
                 .authenticationFailureHandler(new MyServerAuthenticationFailureHandler())
                 .and().logout()
+//                .and().addFilterAt(codeGrantWebFilter, SecurityWebFiltersOrder.OAUTH2_AUTHORIZATION_CODE)
+//                .addFilterAt(oauthRedirectFilter, SecurityWebFiltersOrder.HTTP_BASIC)
+//                .and().oauth2Client()
 //               .and().oauth2Login()
                 .and().build();
     }

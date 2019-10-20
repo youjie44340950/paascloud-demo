@@ -25,11 +25,6 @@ public class SysUserController  implements SysUserFeignApi {
     @Autowired
     private ProductFeignApi productFeignApi;
 
-    @PostMapping("/uac/registered")
-    public Wrapper registered(@RequestBody SysUser sysUser){
-        boolean save = userService.save(sysUser);
-        return WrapMapper.wrap(200,"注册成功！ 请前往登陆");
-    }
 
     @Override
     public Wrapper<SysUserVo> queryUserInfo(String loginName) {
@@ -40,6 +35,18 @@ public class SysUserController  implements SysUserFeignApi {
             BeanUtils.copyProperties(one, uacUser);
         }
         return WrapMapper.success(uacUser);
+    }
+
+    @Override
+    public Wrapper registered(@RequestBody SysUserVo sysUser) {
+        SysUser user =  new SysUser();
+        BeanUtils.copyProperties(sysUser,user);
+        SysUser username = userService.getOne(new QueryWrapper<SysUser>().eq("username", user.getUsername()));
+        if (username != null){
+            return WrapMapper.wrap(500,"注册成功！ 该账号已存在");
+        }
+        boolean save = userService.save(user);
+        return WrapMapper.wrap(200,"注册成功！ 请前往登陆");
     }
 
     @Override
