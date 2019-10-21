@@ -3,6 +3,7 @@ package com.paascloud.gateway.config.oauth2;
 import com.paascloud.gateway.config.MyServerAuthenticationFailureHandler;
 import com.paascloud.gateway.config.MyServerAuthenticationSuccessHandler;
 import com.paascloud.gateway.config.MyServerSecurityContextRepository;
+import com.paascloud.provider.service.SysUserFeignApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.ResolvableType;
@@ -54,6 +55,9 @@ public class Oauth2AuthoConfig {
 
     @Autowired
     private MyServerSecurityContextRepository myServerSecurityContextRepository;
+
+    @Autowired
+    private SysUserFeignApi userFeignApi;
 
     /**
      * Configures the {@link ReactiveAuthenticationManager} to use. The default is
@@ -143,7 +147,7 @@ public class Oauth2AuthoConfig {
         authenticationFilter.setServerAuthenticationConverter(getAuthenticationConverter(clientRegistrationRepository));
         RedirectServerAuthenticationSuccessHandler redirectHandler = new RedirectServerAuthenticationSuccessHandler();
 
-        authenticationFilter.setAuthenticationSuccessHandler(new MyServerAuthenticationSuccessHandler());
+        authenticationFilter.setAuthenticationSuccessHandler(new MyServerAuthenticationSuccessHandler(userFeignApi));
         authenticationFilter.setAuthenticationFailureHandler(new MyServerAuthenticationFailureHandler());
 //        authenticationFilter.setAuthenticationFailureHandler(new ServerAuthenticationFailureHandler() {
 //            @Override

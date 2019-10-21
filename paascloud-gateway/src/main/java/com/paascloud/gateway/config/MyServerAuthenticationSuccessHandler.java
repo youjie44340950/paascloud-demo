@@ -9,6 +9,7 @@ import com.paascloud.provider.service.SysUserFeignApi;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -28,13 +29,18 @@ import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
-@Component
 public class MyServerAuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
 
-    @Autowired
     private SysUserFeignApi sysUserFeignApi;
 
     Log log = LogFactory.getLog(MyServerAuthenticationSuccessHandler.class);
+
+    public MyServerAuthenticationSuccessHandler( ){
+    }
+
+    public MyServerAuthenticationSuccessHandler(SysUserFeignApi sysUserFeignApi){
+        this.sysUserFeignApi = sysUserFeignApi;
+    }
 
     @Override
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {

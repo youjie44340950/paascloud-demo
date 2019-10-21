@@ -10,11 +10,13 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-@Component
 public class MyAuthenticationProvider implements ReactiveUserDetailsService {
 
-    @Autowired
     private SysUserFeignApi sysUserFeignApi;
+
+    public MyAuthenticationProvider(SysUserFeignApi sysUserFeignApi){
+        this.sysUserFeignApi = sysUserFeignApi;
+    }
 
     Log log = LogFactory.getLog(MyServerAuthenticationSuccessHandler.class);
 
