@@ -56,8 +56,6 @@
 ```
 后端项目代码地址：https://github.com/youjie44340950/paascloud-demo.git     shell 脚本在 doc 目录下
 
-前端代码地址: https://github.com/youjie44340950/learn.git
-
 配置文件地址: https://github.com/youjie44340950/paascloud-config.git 
        
 ```
