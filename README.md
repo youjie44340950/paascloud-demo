@@ -22,7 +22,6 @@
     连接到需要部署的服务器，通过docker拉取镜像再运行shell脚本启动容器
     部署环境：
        一台CPU：1核  内存：2GiB和两台CPU：1核  内存：1GiB阿里云服务器 操作系统 Centos7 ,和一台云数据库RDS组成，
-    由于服务器不够就没部署日志管理：EFK（Elasticsearch, FileBeat, Kibana） 
     
 ```
 ### 平台目录结构说明
